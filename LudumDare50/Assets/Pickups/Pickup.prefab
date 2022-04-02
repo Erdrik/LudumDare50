@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   self: {fileID: 5030772786413320438}
+  audioSource: {fileID: 0}
   target: {fileID: 0}
   destroyOnPickup: 1
 --- !u!114 &5030772786413320440

@@ -23,6 +23,9 @@ public class TimelineController : MonoBehaviour
     private UIDocument uiDocument;
 
     [SerializeField]
+    private AudioSource pickupAudio;
+
+    [SerializeField]
     private Color badColour;
 
     [SerializeField]
@@ -89,6 +92,7 @@ public class TimelineController : MonoBehaviour
     public void GainTime(float timeGained)
     {
         timeRemaining += timeGained;
+        pickupAudio.Play();
     }
 
     private void EndTimeline()

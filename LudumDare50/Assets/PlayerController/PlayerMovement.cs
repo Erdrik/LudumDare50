@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private InputAction movement;
 
     private float moveTimerAccumulator = 0.0f;
+    private bool moved = false;
+    private bool canceled = false;
 
     private void Awake()
     {
@@ -71,19 +73,30 @@ public class PlayerMovement : MonoBehaviour
 
     private void PrepareMove()
     {
+        Debug.Log("PrepareMove");
         this.move = movement.ReadValue<Vector2>();
+        this.moved = false;
+        this.canceled = false;
     }
 
     private void StopMove()
     {
-        this.move = Vector2.zero;
+        Debug.Log("StopMove");
+        this.canceled = true;
     }
 
     private void Move()
     {
+        if (this.canceled && this.moved)
+        {
+            this.move = Vector2.zero;
+            return;
+        }
+        Debug.Log("Move");
         var moveX = this.move.x > 0.0f ? moveStep : this.move.x < 0.0f ? -moveStep : 0.0f;
         var moveZ = this.move.y > 0.0f ? moveStep : this.move.y < 0.0f ? -moveStep : 0.0f;
         var movement = new Vector3(moveX, 0.0f, moveZ);
         movingTransform.position += movement;
+        this.moved = true;
     }
 }

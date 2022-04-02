@@ -40,21 +40,6 @@ public class PlayerMovement : MonoBehaviour
         movement.canceled += OnMoveCanceled;
     }
 
-    private void OnMoveStarted(InputAction.CallbackContext obj)
-    {
-        PrepareMove();
-    }
-
-    private void OnMovePerformed(InputAction.CallbackContext obj)
-    {
-        PrepareMove();
-    }
-
-    private void OnMoveCanceled(InputAction.CallbackContext obj)
-    {
-        StopMove();
-    }
-
     void OnDisable()
     {
         movement.Disable();
@@ -73,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void PrepareMove()
     {
-        Debug.Log("PrepareMove");
         this.move = movement.ReadValue<Vector2>();
         this.moved = false;
         this.canceled = false;
@@ -81,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopMove()
     {
-        Debug.Log("StopMove");
         this.canceled = true;
     }
 
@@ -92,11 +75,25 @@ public class PlayerMovement : MonoBehaviour
             this.move = Vector2.zero;
             return;
         }
-        Debug.Log("Move");
         var moveX = this.move.x > 0.0f ? moveStep : this.move.x < 0.0f ? -moveStep : 0.0f;
         var moveZ = this.move.y > 0.0f ? moveStep : this.move.y < 0.0f ? -moveStep : 0.0f;
         var movement = new Vector3(moveX, 0.0f, moveZ);
         movingTransform.position += movement;
         this.moved = true;
+    }
+
+    private void OnMoveStarted(InputAction.CallbackContext obj)
+    {
+        PrepareMove();
+    }
+
+    private void OnMovePerformed(InputAction.CallbackContext obj)
+    {
+        PrepareMove();
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext obj)
+    {
+        StopMove();
     }
 }

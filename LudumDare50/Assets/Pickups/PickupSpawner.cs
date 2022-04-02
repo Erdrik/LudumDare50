@@ -18,7 +18,7 @@ public class PickupSpawner : MonoBehaviour
 
     private List<int> timeGainerAvailablePositions;
 
-    private void Start()
+    void Start()
     {
         timeGainerAvailablePositions = new List<int>();
         for (var i = 0; i < timeGainerSpawnPositions.Count; ++i)
@@ -47,6 +47,11 @@ public class PickupSpawner : MonoBehaviour
 
     private void SpawnTimeGainer(DateTime currentTime)
     {
+        if (timeGainerAvailablePositions.Count == 0)
+        {
+            return;
+        }
+
         var nextTimeGainer = lastTimeGainer.AddMilliseconds(timeGainerOffsetMilliseconds);
         if (currentTime >= nextTimeGainer)
         {

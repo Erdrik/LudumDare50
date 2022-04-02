@@ -9,6 +9,9 @@ public class TimeGainer : MonoBehaviour
     private Pickup pickup;
 
     [SerializeField]
+    private TimelineController timelineController;
+
+    [SerializeField]
     private float timeGained;
 
     // Start is called before the first frame update
@@ -19,6 +22,6 @@ public class TimeGainer : MonoBehaviour
 
     private void OnPickedUp()
     {
-        Debug.Log("Picked up!");
+        timelineController.GainTime(timeGained);
     }
 }

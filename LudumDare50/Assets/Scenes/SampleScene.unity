@@ -2646,6 +2646,7 @@ MonoBehaviour:
   movingTransform: {fileID: 1985000367}
   moveTimer: 0.2
   moveStep: 2
+  limits: {x: 4, y: 4}
 --- !u!1 &2029271827
 GameObject:
   m_ObjectHideFlags: 0

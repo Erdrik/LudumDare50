@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float moveStep = 1.0f;
 
+    [SerializeField]
+    private Vector2 limits = new Vector2(4.0f, 4.0f);
+
     private Vector2 move;
     private InputAction movement;
 
@@ -77,6 +80,22 @@ public class PlayerMovement : MonoBehaviour
         {
             this.move = Vector2.zero;
             return;
+        }
+        if (this.move.x > 0.0f && movingTransform.position.x >= limits.x)
+        {
+            this.move.x = 0.0f;
+        }
+        else if (this.move.x < 0.0f && movingTransform.position.x <= -limits.x)
+        {
+            this.move.x = 0.0f;
+        }
+        if (this.move.y > 0.0f && movingTransform.position.z >= limits.y)
+        {
+            this.move.y = 0.0f;
+        }
+        else if (this.move.y < 0.0f && movingTransform.position.z <= -limits.y)
+        {
+            this.move.y = 0.0f;
         }
         var moveX = this.move.x > 0.0f ? moveStep : this.move.x < 0.0f ? -moveStep : 0.0f;
         var moveZ = this.move.y > 0.0f ? moveStep : this.move.y < 0.0f ? -moveStep : 0.0f;

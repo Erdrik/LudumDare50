@@ -18,6 +18,14 @@ public class Pickup : MonoBehaviour
 
     private Vector3 offset;
 
+    void Start()
+    {
+        if (target == null)
+        {
+            target = PlayerMovement.Instance;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (self == null || target == null)

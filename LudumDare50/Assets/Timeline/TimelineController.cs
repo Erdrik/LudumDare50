@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class TimelineController : MonoBehaviour
 {
+    public static TimelineController Instance;
+
     public event Action TimelineEnded;
 
     [SerializeField]
@@ -34,6 +36,7 @@ public class TimelineController : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         timeBackground = uiDocument.rootVisualElement.Q<VisualElement>("TimeBackground");
         timeLabel = uiDocument.rootVisualElement.Q<Label>("TimeLabel");
         timeRemaining = startingTime;

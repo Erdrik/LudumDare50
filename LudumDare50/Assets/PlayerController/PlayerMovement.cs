@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static Transform Instance;
+
     private PlayerControls playerControls;
 
     [SerializeField]
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
+        Instance = movingTransform;
     }
 
     // Start is called before the first frame update

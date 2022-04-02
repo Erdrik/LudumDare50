@@ -18,6 +18,10 @@ public class TimeGainer : MonoBehaviour
     void Start()
     {
         pickup.PickedUp += OnPickedUp;
+        if (timelineController == null)
+        {
+            timelineController = TimelineController.Instance;
+        }
     }
 
     private void OnPickedUp()

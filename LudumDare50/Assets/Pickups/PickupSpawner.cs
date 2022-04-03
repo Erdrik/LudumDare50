@@ -6,24 +6,27 @@ using UnityEngine;
 public class PickupSpawner : MonoBehaviour
 {
     [SerializeField]
-    private List<Vector3> timeGainerSpawnPositions;
+    private List<Vector3> spawnPositions;
 
     [SerializeField]
-    private GameObject timeGainerPickup;
+    private Transform player;
 
     [SerializeField]
-    private float timeGainerOffsetMilliseconds;
+    private GameObject pickupPrefab;
 
-    private DateTime lastTimeGainer = DateTime.MinValue;
+    [SerializeField]
+    private float offsetMilliseconds;
 
-    private List<int> timeGainerAvailablePositions;
+    private DateTime lastSpawn = DateTime.MinValue;
+
+    private List<int> availablePositions;
 
     void Start()
     {
-        timeGainerAvailablePositions = new List<int>();
-        for (var i = 0; i < timeGainerSpawnPositions.Count; ++i)
+        availablePositions = new List<int>();
+        for (var i = 0; i < spawnPositions.Count; ++i)
         {
-            timeGainerAvailablePositions.Add(i);
+            availablePositions.Add(i);
         }
     }
 
@@ -31,35 +34,35 @@ public class PickupSpawner : MonoBehaviour
     void FixedUpdate()
     {
         var timeNow = DateTime.UtcNow;
-        SpawnTimeGainer(timeNow);
+        SpawnPickup(timeNow);
     }
 
     void OnDrawGizmosSelected()
     {
         var previousColor = Gizmos.color;
         Gizmos.color = Color.yellow;
-        foreach (var spawnPosition in timeGainerSpawnPositions)
+        foreach (var spawnPosition in spawnPositions)
         {
             Gizmos.DrawCube(spawnPosition, new Vector3(0.25f, 0.25f, 0.25f));
         }
         Gizmos.color = previousColor;
     }
 
-    private void SpawnTimeGainer(DateTime currentTime)
+    private void SpawnPickup(DateTime currentTime)
     {
-        if (timeGainerAvailablePositions.Count == 0)
+        if (availablePositions.Count == 0)
         {
             return;
         }
 
-        var nextTimeGainer = lastTimeGainer.AddMilliseconds(timeGainerOffsetMilliseconds);
+        var nextTimeGainer = lastSpawn.AddMilliseconds(offsetMilliseconds);
         if (currentTime >= nextTimeGainer)
         {
-            var randomPosition = GetRandomPosition(timeGainerSpawnPositions, timeGainerAvailablePositions, out var randomIndex);
-            var gameObject = Instantiate(timeGainerPickup, randomPosition, Quaternion.identity);
+            var randomPosition = GetRandomPosition(spawnPositions, availablePositions, out var randomIndex);
+            var gameObject = Instantiate(pickupPrefab, randomPosition, Quaternion.identity);
             var pickup = gameObject.GetComponent<Pickup>();
             pickup.PickedUp += () => { PositionCleared(randomIndex); };
-            lastTimeGainer = currentTime;
+            lastSpawn = currentTime;
         }
     }
 
@@ -73,6 +76,6 @@ public class PickupSpawner : MonoBehaviour
 
     private void PositionCleared(int index)
     {
-        timeGainerAvailablePositions.Add(index);
+        availablePositions.Add(index);
     }
 }

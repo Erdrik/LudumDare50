@@ -55,9 +55,15 @@ public class TimelineController : MonoBehaviour
 
     public DangerLevel CurrentDangerLevel { get => dangerLevel; }
 
-    void Start()
+    public float TotalTime { get; private set; } = -1.0f;
+
+    private void Start()
     {
         Instance = this;
+    }
+
+    void OnEnable()
+    {
         timeBackground = uiDocument.rootVisualElement.Q<VisualElement>("TimeBackground");
         timeLabel = uiDocument.rootVisualElement.Q<Label>("TimeLabel");
         timeRemaining = startingTime;
@@ -65,7 +71,9 @@ public class TimelineController : MonoBehaviour
 
     private void Update()
     {
-        timeRemaining -= Time.deltaTime * countdownMultiplier;
+        var timeTaken = Time.deltaTime * countdownMultiplier;
+        TotalTime += timeTaken;
+        timeRemaining -= timeTaken;
     }
 
     private void FixedUpdate()

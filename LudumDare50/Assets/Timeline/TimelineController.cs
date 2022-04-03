@@ -26,6 +26,12 @@ public class TimelineController : MonoBehaviour
     private AudioSource pickupAudio;
 
     [SerializeField]
+    private AudioClip timeGainedSound;
+
+    [SerializeField]
+    private AudioClip timeLostSound;
+
+    [SerializeField]
     private Color badColour;
 
     [SerializeField]
@@ -102,7 +108,14 @@ public class TimelineController : MonoBehaviour
     public void GainTime(float timeGained)
     {
         timeRemaining += timeGained;
-        pickupAudio.Play();
+        if (timeGained > 0)
+        {
+            pickupAudio.PlayOneShot(timeGainedSound);
+        }
+        else
+        {
+            pickupAudio.PlayOneShot(timeLostSound);
+        }
     }
 
     private void EndTimeline()

@@ -390,6 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 198972942}
   pickupAudio: {fileID: 198972945}
+  timeGainedSound: {fileID: 0}
+  timeLostSound: {fileID: 0}
   badColour: {r: 1, g: 0, b: 0, a: 0.39215687}
   goodColour: {r: 0.18529366, g: 0.6509434, b: 0, a: 0.39215687}
   greatColour: {r: 0, g: 0.6509434, b: 0.4733226, a: 0.39215687}
@@ -735,7 +737,8 @@ MonoBehaviour:
   - startTime: 45
     narration: {fileID: 8300000, guid: 5929d2cef336b97498a77ae15c635881, type: 3}
     subtitle: The shadows will never stop
-    enable: []
+    enable:
+    - {fileID: 943987313}
   - startTime: 65
     narration: {fileID: 8300000, guid: a91dedf92fa2b2e47a6e979bcd9fe88c, type: 3}
     subtitle: Yet we press on
@@ -796,7 +799,7 @@ GameObject:
   - component: {fileID: 396385149}
   - component: {fileID: 396385150}
   m_Layer: 0
-  m_Name: PickupSpawner
+  m_Name: LightSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,8 +837,14 @@ MonoBehaviour:
   - {x: 4, y: 0, z: 0}
   - {x: 0, y: 0, z: -4}
   - {x: 0, y: 0, z: 4}
+  - {x: 4, y: 0, z: 4}
+  - {x: -4, y: 0, z: 4}
+  - {x: -4, y: 0, z: -4}
+  - {x: 4, y: 0, z: -4}
+  player: {fileID: 0}
   pickupPrefab: {fileID: 5030772786413320437, guid: 8c70318a077d8af4e9129d4665dd0e83, type: 3}
   offsetMilliseconds: 2000
+  maxSpawns: 4
 --- !u!1 &418793389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,6 +2128,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929921908}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &943987313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943987315}
+  - component: {fileID: 943987314}
+  m_Layer: 0
+  m_Name: ShadowSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &943987314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943987313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5198722c708644dabf8f7f8d36a233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPositions:
+  - {x: -2, y: 0, z: -2}
+  - {x: 2, y: 0, z: 2}
+  - {x: -2, y: 0, z: 2}
+  - {x: 2, y: 0, z: -2}
+  - {x: -4, y: 0, z: -2}
+  - {x: 4, y: 0, z: -2}
+  - {x: -2, y: 0, z: 4}
+  - {x: -2, y: 0, z: -4}
+  - {x: 2, y: 0, z: -4}
+  - {x: 2, y: 0, z: 4}
+  - {x: -4, y: 0, z: 2}
+  - {x: 4, y: 0, z: 2}
+  player: {fileID: 1985000367}
+  pickupPrefab: {fileID: 5030772786413320437, guid: f7db3b153b41fd640bbd6d96e22c848b, type: 3}
+  offsetMilliseconds: 2000
+  maxSpawns: 3
+--- !u!4 &943987315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943987313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

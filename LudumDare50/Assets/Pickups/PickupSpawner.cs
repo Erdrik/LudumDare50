@@ -17,6 +17,9 @@ public class PickupSpawner : MonoBehaviour
     [SerializeField]
     private float offsetMilliseconds;
 
+    [SerializeField]
+    private int maxSpawns = 4;
+
     private DateTime lastSpawn = DateTime.MinValue;
 
     private List<int> availablePositions;
@@ -50,7 +53,7 @@ public class PickupSpawner : MonoBehaviour
 
     private void SpawnPickup(DateTime currentTime)
     {
-        if (availablePositions.Count == 0)
+        if (availablePositions.Count == 0 || availablePositions.Count < (spawnPositions.Count - maxSpawns) )
         {
             return;
         }

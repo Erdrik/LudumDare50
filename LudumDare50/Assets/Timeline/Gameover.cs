@@ -101,6 +101,7 @@ public class Gameover : MonoBehaviour
 
     private IEnumerator GameoverCoroutine(AudioClip sound, float delay, string subtitlesText, Color imageColor, int scene)
     {
+        ending = true;
         timelineController.gameObject.SetActive(false);
         narrator.PlayOneShot(sound);
         subtitles.text = subtitlesText;

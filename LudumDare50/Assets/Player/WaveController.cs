@@ -69,7 +69,9 @@ public class WaveController : MonoBehaviour
 
     private void PlayWave(WaveDetails waveDetails)
     {
-        narrator.PlayOneShot(waveDetails.narration);
+        if (waveDetails.narration != null) {
+            narrator.PlayOneShot(waveDetails.narration);
+        }
         subtitleText.SetText(waveDetails.subtitle);
         foreach (var enableTarget in waveDetails.enable)
         {

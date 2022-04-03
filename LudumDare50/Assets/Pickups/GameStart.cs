@@ -14,11 +14,14 @@ public class GameStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pickup.PickedUp += OnPickedUp;
+        pickup.Disappeared += OnDisappeared;
     }
 
-    private void OnPickedUp()
+    private void OnDisappeared(bool pickedUp)
     {
-        waveController.ProgressWave();
+        if (pickedUp)
+        {
+            waveController.ProgressWave();
+        }
     }
 }

@@ -390,8 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 198972942}
   pickupAudio: {fileID: 198972945}
-  timeGainedSound: {fileID: 0}
-  timeLostSound: {fileID: 0}
+  timeGainedSound: {fileID: 8300000, guid: aa2ca32756568374e9fac082fae4a093, type: 3}
+  timeLostSound: {fileID: 8300000, guid: 8146d6132f0149145b67a65bdc3a7c15, type: 3}
   badColour: {r: 1, g: 0, b: 0, a: 0.39215687}
   goodColour: {r: 0.18529366, g: 0.6509434, b: 0, a: 0.39215687}
   greatColour: {r: 0, g: 0.6509434, b: 0.4733226, a: 0.39215687}
@@ -771,6 +771,11 @@ MonoBehaviour:
     narration: {fileID: 8300000, guid: b572c0b6a2b13da4a8a004c95dd05900, type: 3}
     subtitle: You are the undying flames... show them why!
     enable: []
+  - startTime: 125
+    narration: {fileID: 0}
+    subtitle: 
+    enable:
+    - {fileID: 1619017041}
   nextWave: 0
   wavesRemaining: 0
 --- !u!4 &390244564
@@ -3095,10 +3100,15 @@ MonoBehaviour:
   timelineController: {fileID: 198972944}
   narrator: {fileID: 390244562}
   gameoverSound: {fileID: 8300000, guid: 6ba060d53cf074242a78b746e1e2d185, type: 3}
-  gameoverDelay: 3
+  victorySound: {fileID: 8300000, guid: 4afd07ffef1f0c142abafec56231ab90, type: 3}
+  gameoverDelay: 2.5
+  victoryDelay: 2.5
   gameoverImage: {fileID: 1965374885}
+  gameoverColor: {r: 0, g: 0, b: 0, a: 1}
+  victoryColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   subtitles: {fileID: 1877211404}
   gameoverSubtitles: Don't give up! Remember...
+  victorySubtitles: Show them what it means to live!
 --- !u!4 &1314083868
 Transform:
   m_ObjectHideFlags: 0
@@ -4291,6 +4301,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607089975}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1619017041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1619017043}
+  - component: {fileID: 1619017042}
+  m_Layer: 0
+  m_Name: VictorySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1619017042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619017041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5198722c708644dabf8f7f8d36a233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPositions:
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: -2}
+  player: {fileID: 1985000367}
+  pickupPrefab: {fileID: 7886160585240842427, guid: d1e99f53d9edfd1458f4ad538b6d46e3, type: 3}
+  offsetMilliseconds: 2000
+  maxSpawns: 1
+--- !u!4 &1619017043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619017041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1685695180
 GameObject:
   m_ObjectHideFlags: 0

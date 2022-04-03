@@ -64,7 +64,7 @@ public class PickupSpawner : MonoBehaviour
             var randomPosition = GetRandomPosition(spawnPositions, availablePositions, out var randomIndex);
             var gameObject = Instantiate(pickupPrefab, randomPosition, Quaternion.identity);
             var pickup = gameObject.GetComponent<Pickup>();
-            pickup.PickedUp += () => { PositionCleared(randomIndex); };
+            pickup.Disappeared += (pickedUp) => { PositionCleared(pickedUp, randomIndex); };
             lastSpawn = currentTime;
         }
     }
@@ -77,7 +77,7 @@ public class PickupSpawner : MonoBehaviour
         return positions[index];
     }
 
-    private void PositionCleared(int index)
+    private void PositionCleared(bool pickedUp, int index)
     {
         availablePositions.Add(index);
     }

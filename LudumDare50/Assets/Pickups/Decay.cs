@@ -6,6 +6,9 @@ using UnityEngine;
 public class Decay : MonoBehaviour
 {
     [SerializeField]
+    private Pickup pickup;
+
+    [SerializeField]
     private float lifetimeMilliseconds;
 
     private DateTime deathTime;
@@ -19,9 +22,9 @@ public class Decay : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (DateTime.UtcNow < deathTime)
+        if (DateTime.UtcNow > deathTime)
         {
-            Destroy(this.gameObject);
+            pickup.Disappear();
         }
     }
 }

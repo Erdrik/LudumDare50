@@ -1,20 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Wall : MonoBehaviour
+public class GameVictory : MonoBehaviour
 {
     [SerializeField]
     private Pickup pickup;
 
-    [SerializeField]
-    private TimelineController timelineController;
-
-    [SerializeField]
-    private float timeLost;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         pickup.Disappeared += OnDisappeared;
     }
@@ -23,7 +21,7 @@ public class Wall : MonoBehaviour
     {
         if (pickedUp)
         {
-            timelineController.GainTime(timeLost);
+            Gameover.Instance.Victory();
         }
     }
 }

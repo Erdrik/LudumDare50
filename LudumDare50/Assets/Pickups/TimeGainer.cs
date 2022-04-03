@@ -17,15 +17,18 @@ public class TimeGainer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pickup.PickedUp += OnPickedUp;
+        pickup.Disappeared += OnDisappeared;
         if (timelineController == null)
         {
             timelineController = TimelineController.Instance;
         }
     }
 
-    private void OnPickedUp()
+    private void OnDisappeared(bool pickedUp)
     {
-        timelineController.GainTime(timeGained);
+        if (pickedUp)
+        {
+            timelineController.GainTime(timeGained);
+        }
     }
 }

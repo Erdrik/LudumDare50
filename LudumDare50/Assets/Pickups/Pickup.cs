@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public event Action PickedUp;
+    public event Action<bool> Disappeared;
 
     [SerializeField]
     private Transform self;
@@ -43,13 +43,19 @@ public class Pickup : MonoBehaviour
         Check();
     }
 
+    public void Disappear()
+    {
+        Disappeared?.Invoke(false);
+        Destroy(this.gameObject);
+    }
+
     private void Check()
     {
         offset = target.position - self.position;
         var offsetSqrMagnitude = offset.sqrMagnitude;
         if (offsetSqrMagnitude < 1.0f)
         {
-            PickedUp?.Invoke();
+            Disappeared?.Invoke(true);
             if (destroyOnPickup)
             {
                 Destroy(this.gameObject);

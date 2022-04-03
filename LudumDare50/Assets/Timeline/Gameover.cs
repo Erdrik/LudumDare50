@@ -12,6 +12,8 @@ using UnityEditor;
 
 public class Gameover : MonoBehaviour
 {
+    public static Gameover Instance { get; private set; }
+
     [SerializeField]
     private TimelineController timelineController;
 
@@ -22,10 +24,22 @@ public class Gameover : MonoBehaviour
     private AudioClip gameoverSound;
 
     [SerializeField]
+    private AudioClip victorySound;
+
+    [SerializeField]
     private float gameoverDelay;
 
     [SerializeField]
+    private float victoryDelay;
+
+    [SerializeField]
     private Image gameoverImage;
+
+    [SerializeField]
+    private Color gameoverColor;
+
+    [SerializeField]
+    private Color victoryColor;
 
     [SerializeField]
     private TextMeshProUGUI subtitles;
@@ -33,7 +47,12 @@ public class Gameover : MonoBehaviour
     [SerializeField]
     private string gameoverSubtitles;
 
+    [SerializeField]
+    private string victorySubtitles;
+
     private PlayerControls playerControls;
+
+    private bool ending = false;
 
     void Awake()
     {
@@ -42,9 +61,20 @@ public class Gameover : MonoBehaviour
 
     void Start()
     {
-        timelineController.TimelineEnded += OnTimelineEnded;
+        Instance = this;
+        if (timelineController != null) {
+            timelineController.TimelineEnded += OnTimelineEnded;
+        }
         playerControls.Menu.Quit.Enable();
         playerControls.Menu.Quit.performed += OnQuit;
+    }
+
+    public void Victory()
+    {
+        if (!ending)
+        {
+            StartCoroutine(GameoverCoroutine(victorySound, victoryDelay, victorySubtitles, victoryColor, 1));
+        }
     }
 
     private void Quit()
@@ -63,15 +93,20 @@ public class Gameover : MonoBehaviour
 
     private void OnTimelineEnded()
     {
-        StartCoroutine(GameoverCoroutine());
+        if (!ending)
+        {
+            StartCoroutine(GameoverCoroutine(gameoverSound, gameoverDelay, gameoverSubtitles, gameoverColor, 0));
+        }
     }
 
-    private IEnumerator GameoverCoroutine()
+    private IEnumerator GameoverCoroutine(AudioClip sound, float delay, string subtitlesText, Color imageColor, int scene)
     {
-        narrator.PlayOneShot(gameoverSound);
-        subtitles.text = gameoverSubtitles;
+        timelineController.gameObject.SetActive(false);
+        narrator.PlayOneShot(sound);
+        subtitles.text = subtitlesText;
+        gameoverImage.color = imageColor;
         gameoverImage.enabled = true;
-        yield return new WaitForSeconds(gameoverDelay);
-        SceneManager.LoadScene(0);
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(scene);
     }
 }

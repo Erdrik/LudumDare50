@@ -121,6 +121,7 @@ public class TimelineController : MonoBehaviour
     private void EndTimeline()
     {
         TimelineEnded?.Invoke();
+        this.gameObject.SetActive(false);
     }
 
     private void CheckDangerLevel()

@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickup: {fileID: 5030772786413320439}
   timelineController: {fileID: 0}
-  timeGained: 1.5
+  timeGained: 1.8
 --- !u!1 &6240625420672795205
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,6 +46,8 @@ public class TimelineController : MonoBehaviour
     [SerializeField]
     private float dangerTime = 15.0f;
 
+    public float countdownMultiplier = 1.0f;
+
     private VisualElement timeBackground;
     private Label timeLabel;
 
@@ -63,7 +65,7 @@ public class TimelineController : MonoBehaviour
 
     private void Update()
     {
-        timeRemaining -= Time.deltaTime;
+        timeRemaining -= Time.deltaTime * countdownMultiplier;
     }
 
     private void FixedUpdate()
